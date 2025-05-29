@@ -1,0 +1,413 @@
+/* ========== ОСНОВНИЙ СТИЛЬ ========== */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  .dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    transition: all 0.3s ease;
+    align-items: stretch;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebar.collapsed {
+    width: 70px;
+  }
+  
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar nav a {
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar nav a:hover,
+  .sidebar nav a.active {
+    background-color: #333;
+  }
+  
+  .nav-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: left;
+    position: relative;
+  }
+  
+  .sidebar.collapsed .nav-toggle {
+    text-align: center;
+  }
+  
+  .sidebar.collapsed .nav-toggle::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 9px;
+    height: 100%;
+    background-color: #333;
+    border-radius: 0 5px 5px 0;
+  }
+  
+  .sidebar.collapsed .nav-toggle span {
+    padding-right: 4px;
+    padding-left: 0;
+  }
+  
+  .nav-toggle span {
+    display: inline-block;
+    padding-left: 5px;
+  }
+  
+  .avatar:hover {
+    transform: scale(1.1);
+  }
+  
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info {
+    text-align: center;
+  }
+  
+  .name {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #1a1a1a;
+  }
+  
+  .role {
+    font-size: 0.9rem;
+    color: #888;
+  }
+  
+  .sidebar.collapsed .profile-info,
+  .sidebar.collapsed .nav-item {
+    display: none;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 30px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .sidebar.collapsed + .main-content {
+    margin-left: 80px;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .project-logo {
+    height: 50px;
+  }
+  
+  .calendar-navigation {
+    margin: 30px 0;
+    text-align: center;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .calendar-header h2 {
+    font-size: 1.5rem;
+    color: #f6b633;
+  }
+  
+  .nav-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #f6b633;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .nav-btn:hover {
+    background-color: #fcd55f;
+  }
+  
+  .calendar-modes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .mode-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #f6b633;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s ease-in-out;
+  }
+  
+  .mode-button:hover,
+  .mode-button.active {
+    background-color: #fcd55f;
+    transform: scale(1.05);
+  }
+  
+  .weekday-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .calendar-month-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  
+  .calendar-day {
+    background-color: #fffdea;
+    border: 2px solid #f6b633;
+    border-radius: 8px;
+    min-height: 100px;
+    padding: 10px;
+    font-size: 1rem;
+    position: relative;
+    transition: background-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .calendar-day:hover {
+    background-color: #fff2c0;
+  }
+  
+  .calendar-day .event {
+    background-color: #fbec9c;
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-left: 4px solid #f6b633;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .calendar-day .event:hover {
+    background-color: #fcd55f;
+  }
+  
+  .tooltip {
+    position: absolute;
+    background-color: #fff;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #f6b633;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    z-index: 999;
+    pointer-events: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendar-week-grid {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 10px;
+    align-items: end;
+  }
+  
+  .calendar-week-time-column {
+    display: grid;
+    grid-template-rows: repeat(10, 60px);
+    align-items: end;
+  }
+  
+  .time-cell {
+    text-align: right;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #555;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+  }
+  
+  .calendar-week-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  
+  .day-column {
+    background-color: #fffdea;
+    border: 2px solid #f6b633;
+    border-radius: 8px;
+    min-height: 500px;
+    padding: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .day-column .week-date-label {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 1rem;
+    padding: 5px 0;
+  }
+  
+  .day-hour-grid {
+    display: grid;
+    grid-template-rows: repeat(10, 60px);
+    position: relative;
+    flex-grow: 1;
+  }
+  
+  .event {
+    position: absolute;
+    background-color: #fbec9c;
+    border-left: 4px solid #f6b633;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .event:hover {
+    background-color: #fcd55f;
+    transform: scale(1.03);
+  }
+  
+  .calendar-day-view {
+    display: grid;
+    grid-template-rows: repeat(24, 1fr);
+    border-left: 3px solid #f6b633;
+  }
+  
+  .hour-slot {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+    height: 70px;
+    position: relative;
+  }
+  
+  .hour-slot .event {
+    background-color: #fcd55f;
+    position: absolute;
+    left: 25%;
+    right: 10%;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  /* ========== РІЧНИЙ ПЕРЕГЛЯД ========== */
+  .calendar-year-view {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  .month-cell {
+    background-color: #fff8e1;
+    border: 2px solid #f6b633;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  .month-cell:hover {
+    background-color: #fcd55f;
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 768px) {
+    .calendar-year-view {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .calendar-year-view {
+      grid-template-columns: 1fr;
+    }
+  }
+  

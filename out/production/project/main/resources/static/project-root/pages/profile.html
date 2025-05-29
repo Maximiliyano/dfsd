@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Дашборд | Освітній простір</title>
+    <link rel="stylesheet" href="../css/pages/dashboard.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <script defer src="../js/dashboard.js"></script>
+</head>
+<body>
+<div class="dashboard-container">
+    <aside class="sidebar">
+        <div class="nav-toggle">
+            <span>☰</span>
+        </div>
+        <nav class="nav">
+            <div class="profile">
+                <img
+                        src="../assets/images/user-avatar.png"
+                        alt="Аватар"
+                        class="avatar"
+                />
+                <div class="profile-info">
+                    <h2 class="name">Loading...</h2>
+                    <script>
+                        let nameElement = document.querySelector(".name");
+                        let storedName = localStorage.getItem("name");
+                        if (nameElement) {
+                            nameElement.textContent = storedName;
+                        }
+                    </script>
+                    <p class="role">Учень</p>
+                </div>
+            </div>
+            <a href="dashboard.html" class="nav-item active">Головна</a>
+            <a href="calendar.html" class="nav-item">Календар</a>
+            <a href="tasks.html" class="nav-item">Завдання</a>
+            <a href="profile.html" class="nav-item">Профіль</a>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <header class="header">
+            <h2 class="profile">Профіль</h2>
+            <h2 class="greet">Loading...</h2>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    let nameElement = document.querySelector(".greet");
+                    let storedName = localStorage.getItem("name") || "Невідомий користувач";
+                    if (nameElement) {
+                        nameElement.textContent = storedName;
+                    } else {
+                        console.error("Елемент .greet не знайдено!");
+                    }
+                });
+            </script>
+        </header>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Дашборд | Освітній простір</title>
+    <link rel="stylesheet" href="/css/pages/dashboard.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <script defer src="/js/dashboard.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container" data-role="student">
+      <aside class="sidebar">
+        <div class="nav-toggle"><span>☰</span></div>
+        <nav class="nav">
+          <div class="profile">
+            <img
+              src="/assets/images/user-avatar.png"
+              alt="Аватар"
+              class="avatar"
+            />
+            <div class="profile-info">
+              <div class="profile-info">
+                <h2 class="name">Loading...</h2>
+                <script>
+                  let nameElement = document.querySelector(".name");
+                  let storedName = localStorage.getItem("name");
+                  if (nameElement) {
+                    nameElement.textContent = storedName;
+                  }
+                </script>
+                <p class="role">parents</p>
+              </div>
+            </div>
+          </div>
+     <a href="parents_dashboard.html" class="nav-item active">Головна</a>
+          <a href="parents_calendar.html" class="nav-item">Календар</a>
+          <a href="parents_events.html" class="nav-item">Події</a>
+          <a href="parents_tasks.html" class="nav-item">Завдання</a>
+          <a href="parents_profile.html" class="nav-item">Профіль</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="header">
+          <div class="header-content">
+            <h2 class="greet">Loading...</h2>
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                let nameElement = document.querySelector(".greet");
+                let storedName = localStorage.getItem("name") || "Невідомий користувач";
+                if (nameElement) {
+                  nameElement.textContent = "Вітаємо, " + storedName + "!";
+                } else {
+                  console.error("Елемент .greet не знайдено!");
+                }
+              });
+              let token;
+              fetch("http://localhost:8080/api/protected", {
+                method: "GET",
+                headers: {
+                  "Authorization": `Bearer ${token}`
+                }
+              })
+            </script>
+            <img
+              src="/assets/images/logo.png"
+              alt="Логотип Освітній простір"
+              class="project-logo"
+            />
+          </div>
+        </header>
+        <section class="features-section">
+          <div class="feature-block">
+            <img
+              src="/assets/images/calendar-icon.png"
+              alt="Календар"
+              class="feature-icon"
+            />
+            <h2>Календар</h2>
+            <p>Плануйте свій час та слідкуйте за подіями.</p>
+            <a href="parents_calendar.html" class="feature-link"
+              >Перейти до календаря</a
+            >
+          </div>
+          <div class="feature-block">
+            <img
+              src="/assets/images/events-icon.png"
+              alt="Події"
+              class="feature-icon"
+            />
+            <h2>Події</h2>
+            <p>Приєднуйтеся до подій та створюйте власні.</p>
+            <a href="parents_events.html" class="feature-link">Перейти до подій</a>
+          </div>
+          <div class="feature-block">
+            <img
+              src="/assets/images/tasks-icon.png"
+              alt="Завдання"
+              class="feature-icon"
+            />
+            <h2>Завдання</h2>
+            <p>Керуйте своїми завданнями та досягайте цілей.</p>
+            <a href="parents_tasks.html" class="feature-link">Перейти до завдань</a>
+          </div>
+          <div class="feature-block">
+            <img
+              src="/assets/images/profile-icon.png"
+              alt="Профіль"
+              class="feature-icon"
+            />
+            <h2>Профіль</h2>
+            <p>Переглядайте та редагуйте свій профіль.</p>
+            <a href="parents_profile.html" class="feature-link">Перейти до профілю</a>
+          </div>
+        </section>
+
+        <section class="calendar-section">
+          <h2>Календар</h2>
+          <div class="calendar-view">
+            <div class="calendar-header">
+              <button id="prevMonth">&lt;</button>
+              <h3 id="currentMonth">Квітень 2025</h3>
+              <button id="nextMonth">&gt;</button>
+            </div>
+            <div class="calendar-modes">
+              <button class="mode-button active" data-mode="month">
+                Місяць
+              </button>
+              <button class="mode-button" data-mode="week">Тиждень</button>
+              <button class="mode-button" data-mode="day">День</button>
+              <button class="mode-button" data-mode="year">Рік</button>
+            </div>
+            <div id="calendar">
+              <div class="calendar-day" data-date="2025-04-20">
+                20
+                <div
+                  class="event"
+                  data-details='{"title": "Контрольна з математики", "date": "2025-04-20", "time": "10:00", "duration": "2 години", "content": "Підготуватися до контрольної роботи з алгебри.", "location": "Кабінет 205", "participants": ["Іван Іванов", "Петро Сидоров"], "type": "Контрольна робота"}'
+                >
+                  Контрольна з математики
+                  <div class="event-details"></div>
+                </div>
+              </div>
+              <div class="calendar-day" data-date="2025-04-22">
+                22
+                <div
+                  class="event"
+                  data-details='{"title": "Домашнє завдання з історії", "date": "2025-04-22", "time": "14:00", "duration": "1 година", "content": "Прочитати параграф 15 та відповісти на запитання.", "location": "Онлайн", "participants": ["Іван Іванов"], "type": "Завдання"}'
+                >
+                  Домашнє завдання з історії
+                  <div class="event-details"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="tasks-section">
+          <h2>Завдання на сьогодні</h2>
+          <ul id="tasksList">
+            <li
+              class="task-item"
+              data-details='{"title": "Контрольна з математики", "date": "2025-04-20", "content": "Підготуватися до контрольної роботи з алгебри.", "status": "Не виконано"}'
+            >
+              <span class="task-title">Контрольна з математики</span>
+              <span class="task-status">Не виконано</span>
+              <div class="task-details"></div>
+            </li>
+            <li
+              class="task-item"
+              data-details='{"title": "Домашнє завдання з історії", "date": "2025-04-22", "content": "Прочитати параграф 15 та відповісти на запитання.", "status": "Виконано"}'
+            >
+              <span class="task-title">Домашнє завдання з історії</span>
+              <span class="task-status">Виконано</span>
+              <div class="task-details"></div>
+            </li>
+          </ul>
+        </section>
+        <section class="notifications-section">
+          <h2>Сповіщення</h2>
+          <div class="notification">
+            <p>⚠️ "Екзамен з хімії" конфліктує з іншою подією.</p>
+          </div>
+          <div class="notification">
+            <p>ℹ️ Нове завдання: "Підготувати презентацію з біології".</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
+

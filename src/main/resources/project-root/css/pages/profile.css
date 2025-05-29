@@ -1,0 +1,784 @@
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ff0000;
+  color: #333;
+}
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  align-items: stretch;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 20px;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav a {
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background-color: #333;
+}
+
+.nav-toggle {
+  display: block;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 10px;
+  background-color: #333;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-align: left;
+  position: relative;
+}
+
+.sidebar.collapsed .nav-toggle {
+  text-align: center;
+}
+
+.sidebar.collapsed .nav-toggle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 9px;
+  height: 100%;
+  background-color: #333;
+  border-radius: 0 5px 5px 0;
+}
+
+.sidebar.collapsed .nav-toggle span {
+  padding-right: 4px;
+  padding-left: 0;
+}
+
+.nav-toggle span {
+  display: inline-block;
+  padding-left: 5px;
+}
+
+.sidebar.collapsed .profile-info,
+.sidebar.collapsed .nav-item {
+  display: none;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: 80px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.name {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #1a1a1a;
+}
+
+.role {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.project-logo {
+  height: 50px;
+}
+
+.profile-section.own-profile {
+  background-color: #fffdea;
+  border: 2px solid #f6b633;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+
+.profile-avatar-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #f6b633;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info-header {
+  flex-grow: 1;
+}
+
+.profile-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.profile-email,
+.profile-role {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 3px;
+}
+
+.edit-profile-btn {
+  background-color: #fff;
+  color: #f6b633;
+  border: 1px solid #f6b633;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.edit-profile-btn:hover {
+  background-color: #f6b633;
+  color: #fff;
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 15px 25px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  color: #444;
+  font-size: 1rem;
+}
+
+.user-search-section {
+  background-color: #fffbea;
+  border: 2px solid #fcd55f;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.user-search-section h2 {
+  font-size: 1.4rem;
+  color: #d38609;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #fcd55f;
+  padding-bottom: 8px;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+#userSearchInput {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 2px solid #fcd55f;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#searchUsersBtn {
+  padding: 10px 20px;
+  background-color: #f6b633;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+#searchUsersBtn:hover {
+  background-color: #ffce4a;
+}
+
+.search-results {
+  margin-top: 15px;
+}
+
+.user-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+.user-item:hover {
+  background-color: #f9f9f9;
+}
+
+.user-item .user-avatar-small {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.user-item span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1010;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px 35px;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 95%;
+  max-height: 95vh;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.modal-content.profile-view-modal {
+  max-width: 800px;
+  width: 98%;
+}
+
+.modal-content.profile-view-modal h2 {
+  color: #d38609;
+  border-bottom-color: #d38609;
+}
+
+.modal-profile-details {
+  display: flex;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.modal-avatar-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #f6b633;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#modalProfileAvatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-info {
+  flex-grow: 1;
+}
+
+.modal-info p {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.modal-info .label {
+  font-weight: bold;
+  color: #555;
+  margin-right: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.modal-actions.profile-view-actions {
+  margin-top: 20px;
+}
+
+.close-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: #ddd;
+  color: #333;
+}
+
+.close-btn:hover {
+  background-color: #ccc;
+}
+
+#editProfileModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+#editProfileModal .modal-content {
+  background-color: #fff;
+  padding: 30px 35px;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 95%;
+  max-height: 95vh;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+#editProfileModal .modal-content h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #f6b633;
+  border-bottom: 2px solid #f6b633;
+  padding-bottom: 10px;
+}
+
+#editProfileModal .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#editProfileModal .modal-content .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#editProfileModal .modal-content .form-group label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+#editProfileModal .modal-content .form-group input[type="text"],
+#editProfileModal .modal-content .form-group input[type="date"],
+#editProfileModal .modal-content .form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #f6b633;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background-color: #fffbea;
+  color: #333;
+}
+
+#editProfileModal .modal-content .form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+#editProfileModal .modal-content .form-group input:focus,
+#editProfileModal .modal-content .form-group textarea:focus {
+  outline: none;
+  border-color: #ffcf4b;
+  background-color: #fffce5;
+}
+
+#editProfileModal .modal-content .profile-photo-edit {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#editProfileModal .modal-content .current-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f6b633;
+}
+
+#editProfileModal .modal-content .form-group input[type="file"] {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+#editProfileModal .modal-content .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+#editProfileModal .modal-content .modal-actions .save-btn,
+#editProfileModal .modal-content .modal-actions .cancel-btn {
+  padding: 10px 22px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#editProfileModal .modal-content .modal-actions .save-btn {
+  background-color: #f6b633;
+  color: white;
+}
+
+#editProfileModal .modal-content .modal-actions .cancel-btn {
+  background-color: #eee;
+  color: #333;
+}
+
+#editProfileModal .modal-content .modal-actions .cancel-btn:hover {
+  background-color: #ddd;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-info-header {
+    text-align: center;
+  }
+
+  .profile-details {
+    grid-template-columns: auto;
+  }
+
+  .modal-profile-details {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .modal-avatar-container {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content,
+  #editProfileModal .modal-content {
+    padding: 20px;
+  }
+
+  .modal-actions,
+  #editProfileModal .modal-content .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .save-btn,
+  .cancel-btn,
+  #editProfileModal .modal-content .modal-actions .save-btn,
+  #editProfileModal .modal-content .modal-actions .cancel-btn {
+    width: 100%;
+  }
+
+  .profile-photo-edit {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .current-photo {
+    margin-bottom: 10px;
+  }
+
+  .search-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #userSearchInput,
+  #searchUsersBtn {
+    width: 100%;
+  }
+
+  .user-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+#addUserModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1020;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+#addUserModal .modal-content {
+  background-color: #fff;
+  padding: 30px 35px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+#addUserModal .modal-content h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  color: #f6b633;
+  border-bottom: 2px solid #f6b633;
+  padding-bottom: 10px;
+}
+
+#addUserModal .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#addUserModal .modal-content .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#addUserModal .modal-content label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+#addUserModal .modal-content input[type="text"],
+#addUserModal .modal-content input[type="email"],
+#addUserModal .modal-content input[type="password"],
+#addUserModal .modal-content input[type="date"],
+#addUserModal .modal-content textarea,
+#addUserModal .modal-content select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #f6b633;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  background-color: #fffbea;
+  color: #333;
+  box-sizing: border-box;
+}
+
+#addUserModal .modal-content textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+#addUserModal .modal-content select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg fill="%23f6b633" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 1.5em 1.5em;
+  padding-right: 35px;
+}
+
+#addUserModal .modal-content input:focus,
+#addUserModal .modal-content textarea:focus,
+#addUserModal .modal-content select:focus {
+  outline: none;
+  border-color: #ffcf4b;
+  background-color: #fffce5;
+}
+
+#addUserModal .modal-content .form-group#parentsField,
+#addUserModal .modal-content .form-group#classField,
+#addUserModal .modal-content .form-group#subjectField {
+  display: none;
+}
+
+#addUserModal .modal-content .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+#addUserModal .modal-content .modal-actions .save-btn,
+#addUserModal .modal-content .modal-actions .cancel-btn {
+  padding: 10px 22px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#addUserModal .modal-content .modal-actions .save-btn {
+  background-color: #f6b633;
+  color: white;
+}
+
+#addUserModal .modal-content .modal-actions .cancel-btn {
+  background-color: #eee;
+  color: #333;
+}
+
+#addUserModal .modal-content .modal-actions .cancel-btn:hover {
+  background-color: #ddd;
+}
+
+#openAddUserModal {
+  background-color: #f6b633;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+  text-align: left;
+  display: inline-block;
+}
+
+#openAddUserModal:hover {
+  background-color: #ffce4a;
+}
+
+@media (max-width: 600px) {
+  #openAddUserModal {
+    width: 100%;
+    text-align: center;
+  }
+
+  #addUserModal .modal-content {
+    padding: 20px;
+  }
+
+  #addUserModal .modal-content .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #addUserModal .modal-content .modal-actions .save-btn,
+  #addUserModal .modal-content .modal-actions .cancel-btn {
+    width: 100%;
+  }
+}

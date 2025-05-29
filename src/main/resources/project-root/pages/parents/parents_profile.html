@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профіль | Освітній простір</title>
+    <link rel="stylesheet" href="/css/pages/profile.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <script defer src="/js/parents.js/parents_profile.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="nav-toggle"><span>☰</span></div>
+        <nav class="nav">
+          <div class="profile">
+            <img
+              src="/assets/images/user-avatar.png"
+              alt="Аватар"
+              class="avatar"
+            />
+            <div class="profile-info">
+              <h2 class="name">Loading...</h2>
+              <script>
+                let nameElement = document.querySelector(".name");
+                let storedName = localStorage.getItem("name");
+                if (nameElement) {
+                  nameElement.textContent = storedName;
+                }
+              </script>
+              <p class="role">parents</p>
+            </div>
+          </div>
+          <a href="parents_dashboard.html" class="nav-item">Головна</a>
+          <a href="parents_calendar.html" class="nav-item">Календар</a>
+          <a href="parents_events.html" class="nav-item">Події</a>
+          <a href="parents_tasks.html" class="nav-item">Завдання</a>
+          <a href="parents_tasks.html" class="nav-item active">Профіль</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="header">
+          <div class="header-content">
+            <h1>Профіль користувача</h1>
+            <img
+              src="/assets/images/logo.png"
+              alt="Логотип"
+              class="project-logo"
+            />
+          </div>
+        </header>
+
+        <section class="profile-section own-profile">
+          <div class="profile-header">
+            <div class="profile-avatar-container">
+              <img
+                src="/assets/images/user-avatar.png"
+                alt="Фото профілю"
+                class="profile-avatar"
+              />
+            </div>
+            <div class="profile-info-header">
+              <h2 class="greet">Loading...</h2>
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                  let nameElement = document.querySelector(".greet");
+                  let storedName = localStorage.getItem("name") || "Невідомий користувач";
+                  if (nameElement) {
+                    nameElement.textContent = storedName;
+                  } else {
+                    console.error("Елемент .greet не знайдено!");
+                  }
+                });
+                let token;
+                fetch("http://localhost:8080/api/protected", {
+                  method: "GET",
+                  headers: {
+                    "Authorization": `Bearer ${token}`
+                  }
+                })
+              </script>
+              <p class="profile-email">yevhen.tsyskar@example.com</p>
+              <p class="profile-role">parents</p>
+            </div>
+            <button class="edit-profile-btn" id="editProfileBtn">
+              Редагувати профіль
+            </button>
+          </div>
+
+          <div class="profile-details">
+            <div class="detail-item">
+              <span class="detail-label">День народження:</span>
+              <span class="detail-value">15.08.2005</span>
+            </div>
+            <div class="detail-item">
+           
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Батьки:</span>
+              <span class="detail-value">Іван та Марія Цискар</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Додаткова інформація:</span>
+              <p class="detail-value">
+                Захоплююсь програмуванням та робототехнікою.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="user-search-section">
+          <h2>Пошук користувачів</h2>
+          <div class="search-container">
+            <input
+              type="text"
+              id="userSearchInput"
+              placeholder="Пошук за ім'ям або email..."
+            />
+            <button id="searchUsersBtn">Знайти</button>
+          </div>
+          <div class="search-results" id="userSearchResults"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-overlay" id="profileModal" style="display: none">
+      <div class="modal-content profile-view-modal">
+        <h2 id="modalProfileName">Перегляд профілю</h2>
+        <div class="modal-profile-details">
+          <div class="modal-avatar-container">
+            <img
+              id="modalProfileAvatar"
+              src="/assets/images/user-avatar.png"
+              alt="Фото профілю"
+            />
+          </div>
+          <div class="modal-info">
+            <p>
+              <span class="label">Ім'я:</span>
+              <span id="modalProfileFullName"></span>
+            </p>
+            <p>
+              <span class="label">Email:</span>
+              <span id="modalProfileEmail"></span>
+            </p>
+            <p>
+              <span class="label">Роль:</span>
+              <span id="modalProfileRole"></span>
+            </p>
+            <p>
+              <span class="label">День народження:</span>
+              <span id="modalProfileBirthday"></span>
+            </p>
+            <p>
+              <span class="label">Батьки:</span>
+              <span id="modalProfileParents"></span>
+            </p>
+            <p>
+              <span class="label">Додаткова інформація:</span>
+              <span id="modalProfileInfo"></span>
+            </p>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="close-btn" id="closeProfileViewModal">Закрити</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="editProfileModal" style="display: none">
+      <div class="modal-content">
+        <h2>Редагування профілю</h2>
+        <form id="profileForm">
+          <div class="form-group">
+            <label for="profilePhoto">Фото профілю:</label>
+            <div class="profile-photo-edit">
+              <img
+                src="/assets/images/user-avatar.png"
+                alt="Поточне фото"
+                class="current-photo"
+              />
+              <input type="file" id="profilePhoto" accept="image/*" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="profileName">Ім'я:</label>
+            <input type="text" id="profileName" value="Євген Цискар" required />
+          </div>
+
+          <div class="form-group">
+            <label for="profileBirthday">День народження:</label>
+            <input type="date" id="profileBirthday" value="2005-08-15" />
+          </div>
+
+          <div class="form-group">
+            <label for="profileParents">Батьки:</label>
+            <input
+              type="text"
+              id="profileParents"
+              value="Іван та Марія Цискар"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="profileInfo">Додаткова інформація:</label>
+            <textarea id="profileInfo" rows="3">
+Захоплююсь програмуванням та робототехнікою.</textarea
+            >
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit" class="save-btn">Зберегти</button>
+            <button type="button" class="cancel-btn" id="closeEditProfileModal">
+              Скасувати
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

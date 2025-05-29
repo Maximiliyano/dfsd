@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання | Освітній простір</title>
+    <link rel="stylesheet" href="/css/pages/tasks.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <script defer src="/js/tasks.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="nav-toggle"><span>☰</span></div>
+        <nav class="nav">
+          <div class="profile">
+            <img
+              src="/assets/images/user-avatar.png"
+              alt="Аватар"
+              class="avatar"
+            />
+            <div class="profile-info">
+              <h2 class="name">Loading...</h2>
+              <script>
+                let nameElement = document.querySelector(".name");
+                let storedName = localStorage.getItem("name");
+                if (nameElement) {
+                  nameElement.textContent = storedName;
+                }
+              </script>
+              <p class="role">parents</p>
+            </div>
+          </div>
+          <a href="parents_dashboard.html" class="nav-item">Головна</a>
+          <a href="parents_calendar.html" class="nav-item">Календар</a>
+          <a href="parents_events.html" class="nav-item">Події</a>
+          <a href="parents_tasks.html" class="nav-item active">Завдання</a>
+          <a href="parents_profile.html" class="nav-item">Профіль</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="header">
+          <div class="header-content">
+            <h1>Усі завдання</h1>
+            <img
+              src="/assets/images/logo.png"
+              alt="Логотип"
+              class="project-logo"
+            />
+          </div>
+        </header>
+
+        <section class="tasks-section">
+          <div class="tasks-controls">
+            
+
+            <div class="filters">
+              <select class="filter-select" id="taskStatusFilter">
+                <option value="all">Усі статуси</option>
+                <option value="completed">Виконані</option>
+                <option value="pending">Невиконані</option>
+              </select>
+
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Пошук за назвою або описом..."
+              />
+            </div>
+          </div>
+
+          <div class="tasks-list" id="tasksList"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-overlay" id="taskModal" style="display: none">
+      <div class="modal-content">
+        <h2>Створити нове завдання</h2>
+        <form id="taskForm">
+          <label for="taskTitle">Назва завдання:</label>
+          <input type="text" id="taskTitle" required />
+
+          <label for="taskDueDate">Кінцева дата виконання:</label>
+          <input type="date" id="taskDueDate" required />
+
+          <label for="taskContent">Опис завдання:</label>
+          <textarea id="taskContent" rows="3"></textarea>
+
+          <label for="associatedEvent"
+            >Пов'язано з подією (необов'язково):</label
+          >
+          <select id="associatedEvent">
+            <option value="">Не пов'язано</option>
+          </select>
+
+          <div class="modal-actions">
+            <button type="submit" class="save-btn">Зберегти</button>
+            <button type="button" class="cancel-btn" id="closeModal">
+              Скасувати
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+Редагувати

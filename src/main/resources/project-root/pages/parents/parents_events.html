@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Події | Освітній простір</title>
+    <link rel="stylesheet" href="/css/pages/events.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <script defer src="/js/events.js"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="nav-toggle"><span>☰</span></div>
+            <nav class="nav">
+                <div class="profile">
+                    <img src="/assets/images/user-avatar.png" alt="Аватар" class="avatar" />
+                    <div class="profile-info">
+                        <h2 class="name">Loading...</h2>
+                        <script>
+                            let nameElement = document.querySelector(".name");
+                            let storedName = localStorage.getItem("name");
+                            if (nameElement) {
+                                nameElement.textContent = storedName;
+                            }
+                        </script>
+                        <p class="role">parents</p>
+                    </div>
+                </div>
+                <a href="parents_dashboard.html" class="nav-item">Головна</a>
+                <a href="parents_calendar.html" class="nav-item">Календар</a>
+                <a href="parents_events.html" class="nav-item active">Події</a>
+                <a href="parents_tasks.html" class="nav-item">Завдання</a>
+                <a href="parents_profile.html" class="nav-item">Профіль</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-content">
+                    <h1>Усі події</h1>
+                    <img src="/assets/images/logo.png" alt="Логотип" class="project-logo" />
+                </div>
+            </header>
+
+            <section class="events-section">
+                <div class="events-controls">
+                 
+
+                    <div class="filters">
+                        <select class="filter-select" id="eventTypeFilter">
+                            <option value="all">Усі типи</option>
+                            <option value="exam">Екзамен</option>
+                            <option value="test">Контрольна робота</option>
+                            <option value="event">Шкільний захід</option>
+                            <option value="parents">Батьківські збори</option>
+                            <option value="personal">Особиста подія</option>
+                        </select>
+
+                        <select class="filter-select" id="statusFilter">
+                            <option value="all">Усі статуси</option>
+                            <option value="upcoming">Майбутні</option>
+                            <option value="past">Минулі</option>
+                        </select>
+
+                        <input type="text" id="searchInput" placeholder="Пошук за назвою чи датою..." />
+                    </div>
+                </div>
+
+                <div class="events-list" id="eventsList">
+                    <div class="event-card" data-id="1">
+                        <h3 class="event-title">Назва події</h3>
+                        <div class="event-meta">
+                            <span class="event-date">Дата та час</span>
+                            <span class="event-type">Тип події</span>
+                        </div>
+                        <p class="event-description">Короткий опис події.</p>
+                      
+                        <div class="attendance-controls">
+                          
+                            
+                        </div>
+                        <div class="comments-section" data-id="1">
+                            <h4>Коментарі</h4>
+                            <div class="comments-list"></div>
+                            <textarea class="comment-input" placeholder="Ваш коментар..."></textarea>
+                            <button class="submit-comment">Додати коментар</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="eventModal" style="display: none">
+        <div class="modal-content">
+            <h2>Створити нову подію</h2>
+            <form id="eventForm">
+                <label for="eventTitle">Назва події:</label>
+                <input type="text" id="eventTitle" required />
+
+                <label for="eventType">Тип події:</label>
+                <select id="eventType" required>
+                    <option value="exam">Екзамен</option>
+                    <option value="test">Контрольна робота</option>
+                    <option value="event">Шкільний захід</option>
+                    <option value="parents">Батьківські збори</option>
+                    <option value="personal">Особиста подія</option>
+                </select>
+
+                <label for="eventDate">Дата початку:</label>
+                <input type="date" id="eventDate" required />
+
+                <label for="eventTime">Час початку:</label>
+                <input type="time" id="eventTime" required />
+
+                <label for="eventDuration">Тривалість (годин):</label>
+                <input type="number" id="eventDuration" min="0.5" step="0.5" required />
+
+                <label>
+                    <input type="checkbox" id="hideContentUntil" />
+                    Приховати опис до моменту події
+                </label>
+
+                <label for="eventDescription">Опис події:</label>
+                <textarea id="eventDescription" rows="3"></textarea>
+
+                <label for="eventLocation">Місце або посилання:</label>
+                <input type="text" id="eventLocation" />
+
+                <label for="eventParticipants">Учасники (імена або логіни через кому):</label>
+                <input type="text" id="eventParticipants" />
+
+                <label>
+                    <input type="checkbox" id="includeTask" />
+                    Додати завдання до події
+                </label>
+
+                <div id="taskSection" style="display: none">
+                    <h3>Завдання</h3>
+                    <label for="taskTitle">Назва завдання:</label>
+                    <input type="text" id="taskTitle" />
+
+                    <label for="taskDueDate">Кінцева дата виконання:</label>
+                    <input type="date" id="taskDueDate" />
+
+                    <label for="taskDescription">Опис завдання:</label>
+                    <textarea id="taskDescription" rows="2"></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="save-btn">Зберегти</button>
+                    <button type="button" class="cancel-btn" id="closeModal">
+                        Скасувати
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

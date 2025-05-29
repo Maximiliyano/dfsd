@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Календар | Освітній простір</title>
+    <link rel="stylesheet" href="../css/pages/calendar.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <script defer src="../js/calendar.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="nav-toggle"><span>☰</span></div>
+        <nav class="nav">
+          <div class="profile">
+            <img
+              src="../assets/images/user-avatar.png"
+              alt="Аватар"
+              class="avatar"
+            />
+            <div class="profile-info">
+              <h2 class="name">Loading...</h2>
+              <script>
+                let nameElement = document.querySelector(".name");
+                let storedName = localStorage.getItem("name");
+                if (nameElement) {
+                  nameElement.textContent = storedName;
+                }
+              </script>
+              <p class="role">Учень</p>
+            </div>
+          </div>
+          <a href="dashboard.html" class="nav-item">Головна</a>
+          <a href="calendar.html" class="nav-item active">Календар</a>
+          <a href="events.html" class="nav-item">Події</a>
+          <a href="tasks.html" class="nav-item">Завдання</a>
+          <a href="profile.html" class="nav-item">Профіль</a>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="header">
+          <div class="header-content">
+            <h1>Календар подій</h1>
+            <img
+              src="../assets/images/logo.png"
+              alt="Логотип"
+              class="project-logo"
+            />
+          </div>
+        </header>
+
+        <section class="calendar-navigation">
+          <div class="calendar-header">
+            <button id="prevView" class="nav-btn">⟨</button>
+            <h2 id="currentView">Завантаження...</h2>
+            <button id="nextView" class="nav-btn">⟩</button>
+          </div>
+          <div class="calendar-modes">
+            <button class="mode-button active" data-mode="day">День</button>
+            <button class="mode-button" data-mode="week">Тиждень</button>
+            <button class="mode-button" data-mode="month">Місяць</button>
+            <button class="mode-button" data-mode="year">Рік</button>
+          </div>
+        </section>
+
+        <section class="calendar-container">
+          <div id="weekdayHeader" class="weekday-header hidden">
+            <div class="weekday">Пн</div>
+            <div class="weekday">Вт</div>
+            <div class="weekday">Ср</div>
+            <div class="weekday">Чт</div>
+            <div class="weekday">Пт</div>
+            <div class="weekday">Сб</div>
+            <div class="weekday">Нд</div>
+          </div>
+
+          <div id="calendarView" class="calendar-day-view">
+            <div class="calendar-week-grid hidden">
+              <div class="calendar-week-time-column">
+                <div class="time-cell">07:00</div>
+                <div class="time-cell">08:00</div>
+                <div class="time-cell">09:00</div>
+                <div class="time-cell">10:00</div>
+                <div class="time-cell">11:00</div>
+                <div class="time-cell">12:00</div>
+                <div class="time-cell">13:00</div>
+                <div class="time-cell">14:00</div>
+                <div class="time-cell">15:00</div>
+                <div class="time-cell">16:00</div>
+              </div>
+              <div class="calendar-week-days">
+                <div class="day-column">
+                  <div class="week-date-label"></div>
+                  <div class="day-hour-grid"></div>
+                </div>
+                <div class="day-column">
+                  <div class="week-date-label"></div>
+                  <div class="day-hour-grid"></div>
+                </div>
+                <div class="day-column">
+                  <div class="week-date-label"></div>
+                  <div class="day-hour-grid"></div>
+                </div>
+                <div class="day-column">
+                  <div class="week-date-label"></div>
+                  <div class="day-hour-grid"></div>
+                </div>
+                <div class="day-column">
+                  <div class="week-date-label"></div>
+                  <div class="day-hour-grid"></div>
+                </div>
+                <div class="day-column">
+                  <div class="week-date-label"></div>
+                  <div class="day-hour-grid"></div>
+                </div>
+                <div class="day-column">
+                  <div class="week-date-label"></div>
+                  <div class="day-hour-grid"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calendar-month-view hidden"></div>
+            <div class="calendar-year-view hidden">
+              <div class="month-cell">Січень</div>
+              <div class="month-cell">Лютий</div>
+              <div class="month-cell">Березень</div>
+              <div class="month-cell">Квітень</div>
+              <div class="month-cell">Травень</div>
+              <div class="month-cell">Червень</div>
+              <div class="month-cell">Липень</div>
+              <div class="month-cell">Серпень</div>
+              <div class="month-cell">Вересень</div>
+              <div class="month-cell">Жовтень</div>
+              <div class="month-cell">Листопад</div>
+              <div class="month-cell">Грудень</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
